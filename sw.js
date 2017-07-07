@@ -1,6 +1,5 @@
 var cacheName = "keeper", filesToCache = 
   [
-    "/",
     "index.html",
     "css/style.css",
     "js/functions.js",
