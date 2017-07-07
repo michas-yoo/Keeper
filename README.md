@@ -1,6 +1,6 @@
 # Capture what's on your mind!
 
-![Keeper screenshot](https://github.com/michas-yoo/Keeper/blob/master/img/Website.png?raw=true)
+![Keeper screenshot](https://github.com/michas-yoo/Keeper/blob/master/img/Main.png?raw=true)
 
 ## Write down what you want:
 - Add notes
