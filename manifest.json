@@ -1,0 +1,25 @@
+{
+  "short_name": "Keeper",
+  "name": "Unlimited keeper by michas",
+  "icons": [
+    {
+      "src": "img/logo48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "img/logo96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "img/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "theme_color": "#2196f3",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}

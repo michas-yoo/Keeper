@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="theme-color" content="#2196f3">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="msapplication-navbutton-color" content="#2196f3">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#2196f3">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Unlimited keeper</title>
+	<link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="img/logo48.png" type="image/png" />
+	<script src="sw.js" async defer></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<header>
+		<h1>ultimate keeper</h1>
+		<input type="text" id="search" placeholder="Search my note">
+	</header>
+	<main>
+	<section id="mainBoard"></section>
+		<div id="popup">
+			<button id="closeButton">x</button>
+			<select id="type">
+				<option selected>Text note</option>
+				<option>Link</option>
+				<option>Password</option>
+				<option>Color</option>
+				<option>Font</option>
+			</select>
+			<input type="text" id="heading" name="heading" placeholder=" Heading">
+			<input type="text" id="text" name="text" placeholder=" Text">
+			<button id="okBut">Ok</button>
+		</div>
+	<button id="addButton">+</button>
+	</main>
+	<script src="js/functions.js" async defer></script>
+</body>
+</html>

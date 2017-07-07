@@ -1,0 +1,267 @@
+@import "https://fonts.googleapis.com/css?family=Comfortaa"
+
+$shadow: rgba(0, 0, 0, 0.65)
+
+body::-webkit-scrollbar-track
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+	border-radius: 10px
+	background-color: #F5F5F5
+
+body::-webkit-scrollbar
+	width: 12px
+	background-color: #F5F5F5
+
+body::-webkit-scrollbar-thumb
+	border-radius: 10px
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3)
+	background-color: #555
+
+*
+	font-family: 'Comfortaa', cursive
+
+.color
+	width: 200px
+	height: 200px
+	border-radius: 50%
+	box-shadow: 5px 5px 10px #cccccc
+
+.checked
+	color: #bbbbbb
+	text-decoration: line-through
+
+.no-notes
+	display: flex
+	align-items: center
+	justify-content: center
+	padding: 0
+
+.some-notes
+	display: grid
+	grid-gap: 25px
+	grid-template-columns: repeat(auto-fill, minmax(250px, auto))
+	padding: 25px 15px
+
+.empty
+	color: #bbbbbb
+	text-align: center
+	line-height: 2
+	user-select: none
+	pointer-events: none
+
+input[type=checkbox]
+	display: none
+
+	&:checked ~ label:after
+		content: ""
+		position: absolute
+		top: calc(50% - 9px)
+		left: calc(50% - 6px)
+		width: 100%
+		height: 40%
+		border-bottom: 2px solid lightseagreen
+		border-left: 2px solid lightseagreen
+		transform: rotate(-45deg)
+
+label
+	width: 15px
+	height: 15px
+	cursor: pointer
+	position: relative
+	background: whitesmoke
+	box-shadow: 0 0 5px #575 inset
+
+html, body
+	height: 100%
+	margin: 0
+	padding: 0
+	font-size: 18px
+
+body
+	height: calc(100vh - 85px)
+
+h2, h3
+	font-weight: normal
+
+button
+	cursor: pointer
+
+	&:focus
+		box-shadow: 0 0 15px darken(skyblue, 5%)
+
+header
+	position: fixed
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	height: 85px
+	display: flex
+	align-items: center
+	justify-content: space-around
+	flex-wrap: wrap
+	background: #2196f3
+	box-shadow: 0 5px 15px #cccccc
+	z-index: 1
+
+	h1
+		margin: 0
+		color: white
+		font-size: 2rem
+		text-transform: uppercase
+		text-shadow: 0 0 5px $shadow
+		-webkit-text-stroke: 1px black
+	
+	#search
+		height: 40px
+		width: 300px
+		padding-left: 15px
+		font-size: 1em
+		outline: none
+		border: none
+		border-radius: 3px
+		box-shadow: 3px 3px 15px $shadow
+		color: #575757
+		font-family: "Comfortaa", cursive
+
+main
+	margin-top: 85px
+	background: #f5f5f5
+
+	#mainBoard
+		height: calc(100% - 25px)
+
+		.item
+			position: relative
+			height: 300px
+			display: flex
+			flex-direction: column
+			align-items: center
+			justify-content: space-around
+			border-radius: 3px
+			box-shadow: 5px 5px 15px rgba(#bbbbbb, 0.65)
+			word-wrap: break-word
+			background: #ffffff
+			cursor: pointer
+
+			@media (max-width: 465px)
+				margin-right: 0
+
+			@media (max-width: 355px)
+				flex-basis: 100%
+
+				.heading
+					font-size: 1.3em
+
+				.text
+					font-size: 1em
+
+			.color
+				background: #13c39f
+				margin-top: 50px
+
+			.heading
+				position: absolute
+				top: 0
+				margin: 10px 0 0 0
+				text-align: center
+
+			.text
+				margin: 0
+				line-height: 1.5
+
+				ul
+					font-size: 20px
+
+#popup
+	position: fixed
+	top: calc(50vh - 275px)
+	left: calc(50% - 175px)
+	width: 350px
+	height: 550px
+	display: none
+	flex-direction: column
+	align-items: center
+	justify-content: space-around
+	background: white
+	box-shadow: 0 0 15px $shadow
+	border-radius: 3px
+	overflow: hidden
+	z-index: 2
+
+#closeButton	
+	background-color: red
+	border: none
+	outline: none
+	position: absolute
+	top: 0
+	right: 0
+	font-size: 1em
+	color: white
+
+#type
+	border: 1px solid #7FDFDD
+	background: transparent
+	cursor: pointer
+
+#heading, #text, #type
+	width: 85%
+	height: 45px
+	border-radius: 3px
+	font-size: 1.5em
+
+#heading, #text
+	border: 1px solid #bbbbbb
+	outline: none
+
+	&:focus
+		box-shadow: 0 0 15px darken(skyblue, 5%)
+
+.colorCircle
+	width: 150px
+	height: 150px
+	border-radius: 50%	
+	box-shadow: 5px 5px 10px #ccc
+
+#okBut
+	width: 200px
+	height: 45px
+	border: none
+	outline: none
+	border-radius: 3px
+	box-shadow: 5px 5px 5px #cccccc
+	background-color: #44D89E
+	font-size: 1.5em
+	color: white
+
+#addButton
+	position: fixed
+	bottom: 25px
+	right: 25px
+	width: 60px
+	height: 60px
+	border: none
+	border-radius: 50%
+	outline: none
+	box-shadow: 3px 3px 15px #999999
+	font-size: 2.3em
+	color: white
+	line-height: 1.6
+	background: red
+
+	&:focus
+		box-shadow: 0 0 15px darken(skyblue, 5%)
+
+
+@media (max-width: 770px)
+	body
+		height: calc(100vh - 120px)
+
+	header
+		height: 120px
+		text-align: center
+
+	main
+		margin-top: 120px
+
+		#mainBoard
+			padding: 25px 15px
