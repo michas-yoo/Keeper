@@ -1,6 +1,6 @@
 # Capture what's on your mind!
 
-![Keeper screenshot](https://github.com/michas-yoo/Keeper/blob/master/img/Main.png?raw=true)
+![No notes](https://github.com/michas-yoo/Keeper/blob/master/img/No_notes.png?raw=true)
 
 ## Write down what you want:
 - Add notes
@@ -8,6 +8,8 @@
 - Add colors, if you are a designer!
 - Save your passwords
 - Make shopping lists
+
+![Keeper screenshot](https://github.com/michas-yoo/Keeper/blob/master/img/Main.png?raw=true)
 
 ## Find what you need
 - Color your notes to find them easily
