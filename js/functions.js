@@ -1,6 +1,6 @@
 const items = $.parseJSON(localStorage.getItem('items')) || [];
 const itemsBoard = $('#mainBoard');
-
+var currentIndex = -1;
 
 //			ALL THE FUNCTIONS
 
@@ -45,24 +45,47 @@ function updateList(cards = [], cardList){
 	checkNotes();
 }
 
-// Deleting the item
-function deleteItem(e){
+// Opening settings popup
+function openSettings(e){
 	const popupDisplay = $('#popup').css('display');
 
 	if(popupDisplay != 'none') $('#closeButton').trigger('click');
 
-	if(!e.target.matches('div')) return;
-	
-	if(confirm('Delete item?') == true){
-		const index = $(e.target).data("index");
+	// If it's clicked on the item's child, send click to the item itself
+	if(e.target.matches('.colorCircle') || e.target.matches('.heading') || e.target.matches('.text')) e.target = $(e.target).parent();
 
-		items.splice(index, 1);
+	const index = $(e.target).data('index');
+	console.log(e.target);
+	if($('#settings').css('display') == 'none'){
+		console.log('yeah, it is');
+		$('#settings').css('display', 'flex');
+	}
+	$('.header').val(items[index].heading);
+	$('.textVal').val(items[index].text);
+	
+	currentIndex = index;
+} 
+
+// Deleting the item
+function deleteItem(item){
+	if(confirm('Delete item?') == true){
+		items.splice(item, 1);
 		localStorage.setItem('items', JSON.stringify(items));
 		updateList(items, itemsBoard);
 		checkNotes();
 	} else {
 		return;
 	}
+}
+
+// Editing the item
+function editItem(item){
+	items[item].heading = $('.header').val();
+	items[item].text = $('.textVal').val();
+	localStorage.setItem('items', JSON.stringify(items));
+	updateList(items, itemsBoard);
+	checkNotes();
+	$('#settings').css('display') == 'flex' ? $('#settings').css('display', 'none') : ''
 }
 
 // Add some text if there are no notes
@@ -92,8 +115,8 @@ function checkNotes(){
 // Add items from localStorage or a message
 items == '' ? checkNotes() : updateList(items, itemsBoard);
 
-// deleteItem function starts after click
-$('#mainBoard').on('click', deleteItem);
+// openSettings function starts after click
+$('.item').on('click', openSettings);
 
 // Opening the popup window
 $("#addButton").click(() => {
@@ -103,6 +126,11 @@ $("#addButton").click(() => {
 
 // Closing the popup window
 $("#closeButton").on("click", () => $("#popup").css('display', 'none'));
+
+// Editing the item
+$('#setOk').on('click', function(){
+	editItem(currentIndex);
+});
 
 // Add item after click
 $('#okBut').on('click', () => {
@@ -144,11 +172,11 @@ $(document).keydown(function(e){
 });
 
 
-// 			SERVICE WORKER
+// // 			SERVICE WORKER
 
-if('serviceWorker' in navigator){
-	navigator.serviceWorker.register('sw.js')
-	.then(function() {
-		console.log("Service Worker Registered"); 
-	});
-};
+// if('serviceWorker' in navigator){
+// 	navigator.serviceWorker.register('sw.js')
+// 	.then(function() {
+// 		console.log("Service Worker Registered"); 
+// 	});
+// };

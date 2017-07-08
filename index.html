@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="manifest" href="manifest.json">
 	<link rel="icon" href="img/logo48.png" type="image/png" />
-	<script src="sw.js" async></script>
+<!-- 	<script src="sw.js" async></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
@@ -20,7 +20,7 @@
 		<input type="text" id="search" placeholder="Search my note">
 	</header>
 	<main>
-	<section id="mainBoard"></section>
+		<section id="mainBoard"></section>
 		<div id="popup">
 			<button id="closeButton">x</button>
 			<select id="type">
@@ -34,7 +34,18 @@
 			<input type="text" id="text" name="text" placeholder=" Text">
 			<button id="okBut">Ok</button>
 		</div>
-	<button id="addButton">+</button>
+		<div id="settings">
+				<input type="text" class="header" placeholder="Heading">
+				<div class="palette">
+					<img src="img/palette.svg" height='75'>
+				</div>
+				<input type="text" class="textVal" placeholder="Text">
+				<div class="buttons">
+					<button class="del">Delete</button>
+					<button id="setOk">Ok</button>
+				</div>
+		</div>
+		<button id="addButton">+</button>
 	</main>
 	<script src="js/functions.js" async></script>
 </body>

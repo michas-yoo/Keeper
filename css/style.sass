@@ -251,6 +251,61 @@ main
 	&:focus
 		box-shadow: 0 0 15px darken(skyblue, 5%)
 
+#settings
+	position: fixed
+	top: calc(50% - 225px)
+	left: calc(50% - 175px)
+	width: 350px
+	height: 450px
+	display: none
+	flex-direction: column
+	align-items: center
+	justify-content: space-around
+	border-radius: 3px
+	box-shadow: 0 0 15px rgba(0, 0, 0, .65)
+	background-color: white
+	z-index: 10
+
+	input
+		width: 85%
+		height: 35px
+		border: 1px solid #bbbbbb
+		border-radius: 3px
+		font-size: 24px
+		text-align: center
+	
+	.palette
+		height: 150px
+		width: 150px
+		display: flex
+		align-items: center
+		justify-content: center
+		border: 1px solid #ccc
+		border-radius: 50%
+		box-shadow: 5px 5px 10px #ccc
+		cursor: pointer
+	
+	.buttons
+		width: 85%
+		height: 40px
+		display: flex
+		align-items: stretch
+		justify-content: space-between
+	
+		button
+			width: 125px
+			border: none
+			border-radius: 3px
+			outline: none
+			font-size: 18px
+			color: white
+			box-shadow: 5px 5px 5px #ccc
+	
+		.del
+			background-color: #F44336
+	
+		#setOk
+			background-color: #44D89E
 
 @media (max-width: 770px)
 	body

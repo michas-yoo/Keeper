@@ -269,6 +269,86 @@ main {
     -webkit-box-shadow: 0 0 15px #71c5e7;
     box-shadow: 0 0 15px #71c5e7; }
 
+#settings {
+  position: fixed;
+  top: calc(50% - 225px);
+  left: calc(50% - 175px);
+  width: 350px;
+  height: 450px;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
+  background-color: white;
+  z-index: 10; }
+  #settings input {
+    width: 85%;
+    height: 35px;
+    border: 1px solid #bbbbbb;
+    border-radius: 3px;
+    font-size: 24px;
+    text-align: center; }
+  #settings .palette {
+    height: 150px;
+    width: 150px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    -webkit-box-shadow: 5px 5px 10px #ccc;
+    box-shadow: 5px 5px 10px #ccc;
+    cursor: pointer; }
+  #settings .buttons {
+    width: 85%;
+    height: 40px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between; }
+    #settings .buttons button {
+      width: 125px;
+      border: none;
+      border-radius: 3px;
+      outline: none;
+      font-size: 18px;
+      color: white;
+      -webkit-box-shadow: 5px 5px 5px #ccc;
+      box-shadow: 5px 5px 5px #ccc; }
+    #settings .buttons .del {
+      background-color: #F44336; }
+    #settings .buttons #setOk {
+      background-color: #44D89E; }
+
 @media (max-width: 770px) {
   body {
     height: calc(100vh - 120px); }
