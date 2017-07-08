@@ -4,7 +4,7 @@
 
 ## Write down what you want:
 - Add notes
-- Add lists
+- Add plans
 - Add colors, if you are a designer!
 - Save your passwords
 - Make shopping lists
