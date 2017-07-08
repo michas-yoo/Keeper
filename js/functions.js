@@ -11,26 +11,23 @@ function addItem(){
 	const heading = $('#heading').val();
 	const text = $('#text').val();
 	
-	if(type != 'Type'){
-		const item = {
-			type,
-			heading, 
-			text
-		};
-		if(heading != '' && text != ''){
-			items.push(item);
-			addToList(items, itemsBoard);
-			localStorage.setItem('items', JSON.stringify(items));
-		} else {
-			return;
-		}
+	const item = {
+		type,
+		heading, 
+		text
+	};
+
+	if(heading != '' && text != ''){
+		items.push(item);
+		updateList(items, itemsBoard);
+		localStorage.setItem('items', JSON.stringify(items));
 	} else {
-		alert('You forgot to select the type of the note');
+		return;
 	}
 }
 
 // Loop through the items array and add a div to the itemsBoard
-function addToList(cards = [], cardList){
+function updateList(cards = [], cardList){
 	cardList.html(cards.map((card, i) => {
 		if(card.type != 'Color'){
 			return `<div class="item" data-index=${i}>
@@ -61,7 +58,7 @@ function deleteItem(e){
 
 		items.splice(index, 1);
 		localStorage.setItem('items', JSON.stringify(items));
-		addToList(items, itemsBoard);
+		updateList(items, itemsBoard);
 		checkNotes();
 	} else {
 		return;
@@ -78,7 +75,7 @@ function checkNotes(){
 		itemsBoard.hasClass('no-notes') ? itemsBoard.removeClass('no-notes') : '';
 		itemsBoard.addClass('some-notes');
 
-		// Add styles to the color type notes
+		// Add styles to the color-type notes
 		for(let n of items){
 			if(n.type === 'Color'){
 				let mh = $('.item').find('div.colorCircle').siblings('h2').css('height');
@@ -89,13 +86,13 @@ function checkNotes(){
 }
 
 
-// EVENT LISTENERS
+// 			EVENT LISTENERS
 
 
-// Add items from localStorage or a note
-items == '' ? checkNotes() : addToList(items, itemsBoard);
+// Add items from localStorage or a message
+items == '' ? checkNotes() : updateList(items, itemsBoard);
 
-// Delete item function starts after click
+// deleteItem function starts after click
 $('#mainBoard').on('click', deleteItem);
 
 // Opening the popup window
@@ -107,13 +104,14 @@ $("#addButton").click(() => {
 // Closing the popup window
 $("#closeButton").on("click", () => $("#popup").css('display', 'none'));
 
-// Add item
+// Add item after click
 $('#okBut').on('click', () => {
 	addItem();
 	$('#popup').css('display', 'none');
 	$('input').each(function(){$(this).val('')});
 });
 
+// Change placeholder according to note type
 $('#type').on('click', function(){
 	if($('#type').val() == 'Link' || $('#type').val() == 'Password'){
 		$('#heading').attr('placeholder', ' Website');
@@ -128,7 +126,7 @@ $('#type').on('click', function(){
 	}
 });
 
-// Using button for control
+// Using buttons for controls
 $(document).keydown(function(e){
 	const popupDisplay = $('#popup').css('display');
 	const KEY_ENTER = 13;
@@ -146,7 +144,7 @@ $(document).keydown(function(e){
 });
 
 
-// SERVICE WORKER
+// 			SERVICE WORKER
 
 if('serviceWorker' in navigator){
 	navigator.serviceWorker.register('sw.js')
