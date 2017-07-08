@@ -38,11 +38,18 @@
 				<input type="text" class="header" placeholder="Heading">
 				<div class="palette">
 					<img src="img/palette.svg" height='75'>
+					<input type="hidden" id="colorName">
 				</div>
 				<input type="text" class="textVal" placeholder="Text">
 				<div class="buttons">
 					<button class="del">Delete</button>
 					<button id="setOk">Ok</button>
+				</div>
+				<div class="colorPick">
+					<div class="color" data-colorCode="0"></div>
+					<div class="color" data-colorCode="1"></div>
+					<div class="color" data-colorCode="2"></div>
+					<div class="color" data-colorCode="3"></div>
 				</div>
 		</div>
 		<button id="addButton">+</button>

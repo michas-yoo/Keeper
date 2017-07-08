@@ -1,6 +1,11 @@
-const items = $.parseJSON(localStorage.getItem('items')) || [];
-const itemsBoard = $('#mainBoard');
+const items = $.parseJSON(localStorage.getItem('items')) || [], itemsBoard = $('#mainBoard');
+const colorCodes = ['#ffffff', '#ccff90', '#80d8ff', '#ffff8d'];
 var currentIndex = -1;
+
+
+for(let n of $('.color')){
+	$(n).css('background-color', colorCodes[$(n).data('colorcode')]);
+}
 
 //			ALL THE FUNCTIONS
 
@@ -14,7 +19,8 @@ function addItem(){
 	const item = {
 		type,
 		heading, 
-		text
+		text,
+		color: 'white'
 	};
 
 	if(heading != '' && text != ''){
@@ -30,12 +36,12 @@ function addItem(){
 function updateList(cards = [], cardList){
 	cardList.html(cards.map((card, i) => {
 		if(card.type != 'Color'){
-			return `<div class="item" data-index=${i}>
+			return `<div class="item" data-index=${i} style="background-color: ${card.color}">
 								<h2 class="heading">${card.heading}</h2>
 								<h3 class="text">${card.text}</h3>
 							</div>`;
 		} else {
-			return `<div class="item" data-index=${i}>
+			return `<div class="item" data-index=${i} style="background-color: ${card.color}">
 								<h2 class="heading">${card.heading}</h2>
 								<div class="colorCircle" style="background-color: ${card.text}"></div>
 								<h3 class="text">${card.text}</h3>
@@ -58,7 +64,7 @@ function openSettings(e){
 
 	const index = $(e.target).data('index');
 
-	$('#settings').css('display') == 'none' ? $('#settings').css('display', 'flex') : '';
+	$('#settings').css('display') == 'none' ? $('#settings').fadeIn(300).css('display', 'flex') : '';
 
 	$('.header').val(items[index].heading);
 	$('.textVal').val(items[index].text);
@@ -66,14 +72,18 @@ function openSettings(e){
 	currentIndex = index;
 } 
 
+function saveAndClose(){
+	localStorage.setItem('items', JSON.stringify(items));
+	updateList(items, itemsBoard);
+	checkNotes();
+	$('#settings').css('display') != 'none' ? $('#settings').css('display', 'none') : '';
+}
+
 // Deleting the item
 function deleteItem(item){
 	if(confirm('Delete item?') == true){
 		items.splice(item, 1);
-		localStorage.setItem('items', JSON.stringify(items));
-		updateList(items, itemsBoard);
-		checkNotes();
-		$('#settings').css('display') != 'none' ? $('#settings').css('display', 'none') : ''
+		saveAndClose();
 	} else {
 		return;
 	}
@@ -83,10 +93,7 @@ function deleteItem(item){
 function editItem(item){
 	items[item].heading = $('.header').val();
 	items[item].text = $('.textVal').val();
-	localStorage.setItem('items', JSON.stringify(items));
-	updateList(items, itemsBoard);
-	checkNotes();
-	$('#settings').css('display') != 'none' ? $('#settings').css('display', 'none') : ''
+	saveAndClose();
 }
 
 // Add some text if there are no notes
@@ -134,6 +141,16 @@ $('#setOk').on('click', () => editItem(currentIndex));
 // Deleting the item
 $('.del').on('click', () => deleteItem(currentIndex));
 
+// Open color palette
+$('.palette').on('click', () => $('.colorPick').css('display') == 'none' ? $('.colorPick').css('display', 'flex') : $('.colorPick').css('display', 'none'));
+
+// Edit item's background color
+$('.color').on('click', function(){
+	items[currentIndex].color = colorCodes[$(this).data('colorcode')];
+	$('.colorPick').css('display', 'none');
+	saveAndClose();
+});
+
 // Add item after click
 $('#okBut').on('click', () => {
 	addItem();
@@ -168,7 +185,8 @@ $(document).keydown(function(e){
 		}
 
 		if(e.which == KEY_ESCAPE){
-			$('#closeButton').trigger('click');
+			$('#popup').css('display') != 'none' ? $('#closeButton').trigger('click') : '';
+			if($('#settings').css('display') != 'none') $('#settings').css('display', 'none');
 		}
 	}
 });
