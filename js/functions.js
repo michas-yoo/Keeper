@@ -47,6 +47,8 @@ function updateList(cards = [], cardList){
 
 // Opening settings popup
 function openSettings(e){
+	if(e.target.matches('section')) return;
+
 	const popupDisplay = $('#popup').css('display');
 
 	if(popupDisplay != 'none') $('#closeButton').trigger('click');
@@ -55,11 +57,9 @@ function openSettings(e){
 	if(e.target.matches('.colorCircle') || e.target.matches('.heading') || e.target.matches('.text')) e.target = $(e.target).parent();
 
 	const index = $(e.target).data('index');
-	console.log(e.target);
-	if($('#settings').css('display') == 'none'){
-		console.log('yeah, it is');
-		$('#settings').css('display', 'flex');
-	}
+
+	$('#settings').css('display') == 'none' ? $('#settings').css('display', 'flex') : '';
+
 	$('.header').val(items[index].heading);
 	$('.textVal').val(items[index].text);
 	
@@ -73,6 +73,7 @@ function deleteItem(item){
 		localStorage.setItem('items', JSON.stringify(items));
 		updateList(items, itemsBoard);
 		checkNotes();
+		$('#settings').css('display') != 'none' ? $('#settings').css('display', 'none') : ''
 	} else {
 		return;
 	}
@@ -85,7 +86,7 @@ function editItem(item){
 	localStorage.setItem('items', JSON.stringify(items));
 	updateList(items, itemsBoard);
 	checkNotes();
-	$('#settings').css('display') == 'flex' ? $('#settings').css('display', 'none') : ''
+	$('#settings').css('display') != 'none' ? $('#settings').css('display', 'none') : ''
 }
 
 // Add some text if there are no notes
@@ -116,7 +117,7 @@ function checkNotes(){
 items == '' ? checkNotes() : updateList(items, itemsBoard);
 
 // openSettings function starts after click
-$('.item').on('click', openSettings);
+$('#mainBoard').on('click', openSettings);
 
 // Opening the popup window
 $("#addButton").click(() => {
@@ -128,9 +129,10 @@ $("#addButton").click(() => {
 $("#closeButton").on("click", () => $("#popup").css('display', 'none'));
 
 // Editing the item
-$('#setOk').on('click', function(){
-	editItem(currentIndex);
-});
+$('#setOk').on('click', () => editItem(currentIndex));
+
+// Deleting the item
+$('.del').on('click', () => deleteItem(currentIndex));
 
 // Add item after click
 $('#okBut').on('click', () => {
