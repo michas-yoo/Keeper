@@ -2,10 +2,11 @@ const items = $.parseJSON(localStorage.getItem('items')) || [], itemsBoard = $('
 const colorCodes = ['#ffffff', '#ccff90', '#80d8ff', '#ffff8d'];
 var currentIndex = -1;
 
-
+// Add background to notes
 for(let n of $('.color')){
 	$(n).css('background-color', colorCodes[$(n).data('colorcode')]);
 }
+
 
 //			ALL THE FUNCTIONS
 
@@ -20,7 +21,7 @@ function addItem(){
 		type,
 		heading, 
 		text,
-		color: 'white'
+		color: '#ffffff'
 	};
 
 	if(heading != '' && text != ''){
@@ -32,7 +33,7 @@ function addItem(){
 	}
 }
 
-// Loop through the items array and add a div to the itemsBoard
+// Fill the inputBoard
 function updateList(cards = [], cardList){
 	cardList.html(cards.map((card, i) => {
 		if(card.type != 'Color'){
@@ -51,8 +52,9 @@ function updateList(cards = [], cardList){
 	checkNotes();
 }
 
-// Opening settings popup
+// Open the settings popup
 function openSettings(e){
+	// if clicked not on the item do nothing
 	if(e.target.matches('section')) return;
 
 	const popupDisplay = $('#popup').css('display');
@@ -72,14 +74,16 @@ function openSettings(e){
 	currentIndex = index;
 } 
 
+// Short hand to updating itemsBoard
 function saveAndClose(){
 	localStorage.setItem('items', JSON.stringify(items));
 	updateList(items, itemsBoard);
 	checkNotes();
-	$('#settings').css('display') != 'none' ? $('#settings').css('display', 'none') : '';
+	$('#settings').css('display') != 'none' ? $('#settings').fadeOut(300) : '';
+	$('#search').val('');
 }
 
-// Deleting the item
+// Delete the item
 function deleteItem(item){
 	if(confirm('Delete item?') == true){
 		items.splice(item, 1);
@@ -89,11 +93,49 @@ function deleteItem(item){
 	}
 }
 
-// Editing the item
+// Edit the item
 function editItem(item){
 	items[item].heading = $('.header').val();
 	items[item].text = $('.textVal').val();
 	saveAndClose();
+}
+
+// Find items
+function findMatch(word){
+	// Do nothing if the search field is empty
+	if (word === '') {
+		saveAndClose();
+		return;
+	}
+
+	const whatMatched = [];
+
+	let matched = items.filter(item => {
+		const regexp = new RegExp(word, 'gi');
+		if(item.heading.match(regexp)){
+			whatMatched.push('heading');
+			return item.heading;
+		}
+		else if(item.text.match(regexp)){
+			whatMatched.push('text');
+			return item.text;
+		}
+	});
+
+	let arr = $('.item'), i = 0;
+
+	for (let n of matched){
+		for (let a = 0; a < arr.length; a++){
+			if(n.heading == $(arr).eq(a).find('.heading').text()){
+	 			$(arr).eq(a).css('display', 'flex');
+	 			whatMatched[i] == 'heading' ? $(arr).eq(a).find('.heading').css('background-color', '#fed280') : $(arr).eq(a).find('.text').css('background-color', '#fed280');
+	 			i++;
+				arr.splice(a, 1);
+			} else { 
+				$(arr).eq(a).css('display', 'none');
+			}
+		}
+	}
 }
 
 // Add some text if there are no notes
@@ -109,6 +151,7 @@ function checkNotes(){
 		// Add styles to the color-type notes
 		for(let n of items){
 			if(n.type === 'Color'){
+				// Calculate the MarginHeight by adding 20px to the header's height
 				let mh = $('.item').find('div.colorCircle').siblings('h2').css('height');
 				$('.item').find('div.colorCircle').css('margin-top', `${parseInt(mh)+20}px`)
 			}
@@ -126,19 +169,19 @@ items == '' ? checkNotes() : updateList(items, itemsBoard);
 // openSettings function starts after click
 $('#mainBoard').on('click', openSettings);
 
-// Opening the popup window
+// Open the popup window and focus on the heading input
 $("#addButton").click(() => {
 	$('#popup').fadeIn(300).css('display', 'flex');
 	$('#heading').focus();
 });
 
-// Closing the popup window
-$("#closeButton").on("click", () => $("#popup").css('display', 'none'));
+// Close the popup window
+$("#closeButton").on("click", () => $("#popup").fadeOut(300));
 
-// Editing the item
+// Edit the item
 $('#setOk').on('click', () => editItem(currentIndex));
 
-// Deleting the item
+// Delete the item
 $('.del').on('click', () => deleteItem(currentIndex));
 
 // Open color palette
@@ -173,7 +216,12 @@ $('#type').on('click', function(){
 	}
 });
 
-// Using buttons for controls
+// Calling findMatch funtion
+$('#search').on('keyup', function(){
+	findMatch($(this).val());
+});
+
+// Using buttons for adding new Item 
 $(document).keydown(function(e){
 	const popupDisplay = $('#popup').css('display');
 	const KEY_ENTER = 13;
@@ -186,13 +234,11 @@ $(document).keydown(function(e){
 
 		if(e.which == KEY_ESCAPE){
 			$('#popup').css('display') != 'none' ? $('#closeButton').trigger('click') : '';
-			if($('#settings').css('display') != 'none') $('#settings').css('display', 'none');
 		}
 	}
 });
 
-
-// // 			SERVICE WORKER
+// 			SERVICE WORKER
 
 if('serviceWorker' in navigator){
 	navigator.serviceWorker.register('sw.js')
