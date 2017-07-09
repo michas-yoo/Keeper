@@ -124,6 +124,11 @@ function findMatch(word){
 
 	let arr = $('.item'), i = 0;
 
+	if(matched.length == 0) {
+		alert('No matches...');
+		saveAndClose();
+	}
+
 	for (let n of matched){
 		for (let a = 0; a < arr.length; a++){
 			if(n.heading == $(arr).eq(a).find('.heading').text()){
