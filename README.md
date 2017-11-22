@@ -1,26 +1,26 @@
-# Capture what's on your mind!
+# Сохраните то, что важно!
 
-![No notes](https://github.com/michas-yoo/Keeper/blob/master/img/No_notes.png?raw=true)
+![Нет заметок](https://github.com/michas-yoo/Keeper/blob/master/img/No_notes.png?raw=true)
 
-## Write down what you want:
-- Add notes
-- Add plans
-- Add colors, if you are a designer!
-- Save your passwords
-- Make shopping lists
+## Записывайте что хотите:
+- Добавляйте заметки
+- Добавляйте планы
+- Если вы дизайнер, то можете даже добавить цвета
+- Сохраняйте пароли
+- Создавайте списки покупок и т.д.
 
-![Keeper screenshot](https://github.com/michas-yoo/Keeper/blob/master/img/Main.png?raw=true)
+![Скриншот приложения](https://github.com/michas-yoo/Keeper/blob/master/img/Main.png?raw=true)
 
-## Find what you need
-- Color your notes to find them easily
-- Use the note search to find exactly what you have written
+## Найдите нужную заметку
+- Закрасьте заметку для большей контрастности
+- Воспользуйтесь поиском и сразу найдите то, что нужно
 
-![Search screenshot](https://github.com/michas-yoo/Keeper/blob/master/img/Search.png?raw=true)
+![Скриншот поиска](https://github.com/michas-yoo/Keeper/blob/master/img/Search.png?raw=true)
 
-## Available everywhere
-You can use this app where you want: on your phone, PC, laptop or tablet
+## Везде доступно
+Это приложение вы можете использовать на ПК, планшете и телефоне
 
-![Keeper mobile screenshot](https://github.com/michas-yoo/Keeper/blob/master/img/Mobile.png?raw=true)
+![Скриншот приложения на телефоне](https://github.com/michas-yoo/Keeper/blob/master/img/Mobile.png?raw=true)
 
-## No internet connection needed
-### [Unlimited keeper](https://michas-yoo.github.io/Keeper/) needs no internet connection to work! All information storages locally, and it's a progressive web app, so it can be downloaded on your phone and requires practically no space!
+## Забудьте про подключение
+### [Unlimited keeper](https://michas-yoo.github.io/Keeper/) совсем не нуждается в доступе к интернету! Вся информация хранится на вашем устройстве, а также это прогрессивное веб-приложение - вы можете скачать его на своё устройсто и оно почти не займет места!
